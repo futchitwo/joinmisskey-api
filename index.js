@@ -98,6 +98,7 @@ async function downloadTemp(name, url, tempDir, alwaysReturn) {
 
 getInstancesInfos()
 	.then(async ({alives, deads, notMisskey, outdated, versions, versionOutput}) => {
+		await mkdirp('./dist')
 		fs.writeFile('./dist/versions.json', JSON.stringify(versionOutput), () => { })
 
 		const stats = alives.reduce((prev, v) => (v.nodeinfo.usage && v.nodeinfo.usage.users) ? {
