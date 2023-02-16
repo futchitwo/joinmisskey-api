@@ -359,7 +359,7 @@ module.exports.getInstancesInfos = async function() {
 			const meta = (await fetchJson('POST', `https://${instance.url}/api/meta`)) || null;
 			const stat = (await fetchJson('POST', `https://${instance.url}/api/stats`)) || null;
 			const NoteChart = (await fetchJson('POST', `https://${instance.url}/api/charts/notes`, { span: "day", limit: 15 })) || null;
-			const ActiveUserChart = (await fetchJson('POST', `https://${instance.url}/api/charts/notes`, { span: "day", limit: 7 })) || null;
+			const ActiveUserChart = (await fetchJson('POST', `https://${instance.url}/api/charts/active-users`, { span: "day", limit: 7 })) || null;
 
 			if (nodeinfo && meta && stat && NoteChart) {
 				if (meta) {
