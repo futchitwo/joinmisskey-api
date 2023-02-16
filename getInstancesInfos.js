@@ -389,7 +389,7 @@ module.exports.getInstancesInfos = async function() {
 
 				let activeUserAvg = 0;
 				if (ActiveUserChart && Array.isArray(ActiveUserChart.readWrite)) {
-					const arr = ActiveUserChart.readWrite.fliter(e => e !== 0)
+					const arr = ActiveUserChart.readWrite.filter(e => e !== 0)
 
 					// アクティブユーザー数の1週間の平均
 					activeUserAvg = arr.length && (arr.reduce((prev, current) => prev + current) / arr.length);
