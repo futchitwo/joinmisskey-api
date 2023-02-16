@@ -231,7 +231,7 @@ getInstancesInfos()
 		glog('FINISHED!')
 		return INSTANCES_JSON;
 	})
-
+/*
 	.then(async INSTANCES_JSON => {
 		// 0. Statistics
 		let tree = await fetch("https://p1.a9z.dev/api/notes/create", {
@@ -324,3 +324,4 @@ https://join.misskey.page/\n#bot #joinmisskeyupdate`,
 			}
 		})
 	})
+*/

@@ -346,9 +346,19 @@ module.exports.getInstancesInfos = async function() {
 				return;
 			};
 
+			/*
+			const [meta, stat, NoteChart, ActiveUserChart] = await promise.All([
+				fetchJson('POST', `https://${instance.url}/api/meta`),
+				fetchJson('POST', `https://${instance.url}/api/stats`),
+				fetchJson('POST', `https://${instance.url}/api/charts/notes`, { span: "day", limit: 15 }),
+				fetchJson('POST', `https://${instance.url}/api/charts/active-users`, { span: "day", limit: 7 }),
+			])
+			*/
+
 			const meta = (await fetchJson('POST', `https://${instance.url}/api/meta`)) || null;
 			const stat = (await fetchJson('POST', `https://${instance.url}/api/stats`)) || null;
 			const NoteChart = (await fetchJson('POST', `https://${instance.url}/api/charts/notes`, { span: "day", limit: 15 })) || null;
+			const ActiveUserChart = (await fetchJson('POST', `https://${instance.url}/api/charts/notes`, { span: "day", limit: 7 })) || null;
 
 			if (nodeinfo && meta && stat && NoteChart) {
 				if (meta) {
@@ -362,22 +372,34 @@ module.exports.getInstancesInfos = async function() {
 				value += 100000 - (versionInfo.count - 30) * 7200
 	
 				// (基準値に影響があるかないか程度に色々な値を考慮する)
+				let noteGrowthAvg = 0;
 				if (NoteChart && Array.isArray(NoteChart.local?.inc)) {
 					// 2.
 					const arr = NoteChart.local?.inc.filter(e => e !== 0)
 
 					// ノート増加数の15日間の平均 * 1
 					// eslint-disable-next-line no-mixed-operators
-					if (arr.length > 0) value += (arr.reduce((prev, current) => prev + current) / arr.length);
+					noteGrowthAvg = arr.length && (arr.reduce((prev, current) => prev + current) / arr.length);
+					value += noteGrowthAvg;
 
 					// もし統計の数が15日に満たない場合、新規インスタンス特典を付与
 					// value += (15 - arr.length) * 360
+				}
+
+				let activeUserAvg = 0;
+				if (ActiveUserChart && Array.isArray(ActiveUserChart.readWrite)) {
+					const arr = ActiveUserChart.readWrite.fliter(e => e !== 0)
+
+					// アクティブユーザー数の1週間の平均
+					activeUserAvg = arr.length && (arr.reduce((prev, current) => prev + current) / arr.length);
 				}
 	
 				alives.push(extend(true, instance, {
 					value,
 					meta,
 					nodeinfo,
+					noteGrowthAvg,
+					activeUserAvg,
 					stats: stat,
 					name: instance.name || nodeinfo.metadata.nodeName || meta.name || instance.url,
 					description: nodeinfo.metadata.nodeDescription || meta.description || (instance.description || null),
