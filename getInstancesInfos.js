@@ -5,6 +5,7 @@ const AbortController = require("abort-controller").default
 const extend = require("extend")
 const loadyaml = require("./loadyaml")
 const Queue = require('promise-queue');
+const fetch = require("node-fetch-with-proxy")
 const { queue } = require("sharp")
 const { performance } = require('perf_hooks');
 

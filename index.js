@@ -7,6 +7,7 @@ const sharp = require("sharp")
 const { createHash } = require("crypto")
 const mkdirp = require('mkdirp')
 const Queue = require('promise-queue');
+const fetch = require("node-fetch-with-proxy")
 const AbortController = require("abort-controller").default
 
 const { getInstancesInfos } = require('./getInstancesInfos')
