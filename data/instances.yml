@@ -1,14 +1,14 @@
 ########################################
-###### インスタンスリスト        #######
-###### The List of Instances     #######
+###### サーバーリスト        #######
+###### The List of Servers     #######
 ########################################
-# joinmisskeyのインスタンスリストは現状手動更新です。
+# joinmisskeyのサーバーリストは現状手動更新です。
 #
-# url: インスタンスのドメインを指定します。
-# langs: インスタンスの言語を文字列の配列で指定します。
-# suspended: bool. インスタンスの存在自体を隠蔽します。
+# url: サーバーのドメインを指定します。
+# langs: サーバーの言語を文字列の配列で指定します。
+# suspended: bool. サーバーの存在自体を隠蔽します。
 # description: 説明を上書きします。通常は指定しません。
-# name: インスタンス名を上書きします。通常は指定しません。
+# name: サーバー名を上書きします。通常は指定しません。
 #
 - url: misskey.io
 - url: misskey.dev
@@ -25,7 +25,7 @@
   langs: ['ja']
 - name: 'Misskey(Tor)'
   url: 5z5ce433e2yp73jqm3yxmyh2yvcn33venhnm5trqde6uwjysxyy3gbad.onion
-  description: xps2氏が運営するTor上のインスタンス
+  description: xps2氏が運営するTor上のサーバー
   langs: ['ja']
 - url: misskey.nokotaro.com
   langs: ['ja']
@@ -691,6 +691,116 @@
   langs: ['ja']
 - url: estrella.misskey.masato.jp
   langs: ['ja']
+- url: misskey.systems
+  langs: ['ja']
+- url: misskey.halby24.com
+  langs: ['ja']
+- url: m.ytpmv.info
+  langs: ['ja']
+- url: kamisato.xyz
+  langs: ['ja']
+- url: m.4869.homes
+  langs: ['ja']
+- url: mi.c-at.jp
+  langs: ['ja']
+- url: misskey.youdofoo.com
+  langs: ['ja']
+- url: misskey.beer
+  langs: ['ja']
+- url: misskey.someden.net
+  langs: ['ja']
+- url: m.u16.io
+  langs: ['ja']
+- url: chunchun.world
+  langs: ['ja']
+- url: misskey.haru3.me
+  langs: ['ja']
+- url: key.dokodare.ovh
+  langs: ['ja']
+- url: strawberry-pudding.net
+  langs: ['ja']
+- url: geoplanetary.net
+  langs: ['ja']
+- url: misskey.gochiuma.net
+  langs: ['ja']
+- url: meron.cloud
+  langs: ['ja']
+- url: msky.pioka.xyz
+  langs: ['ja']
+- url: misskey.in
+  langs: ['ja']
+- url: thxdaddy.xyz
+  langs: ['ja']
+- url: microblog.nalzus.com
+  langs: ['ja']
+- url: misskey.ekurea.net
+  langs: ['ja']
+- url: mk.loupe.page
+  langs: ['ja']
+- url: misskey.komekome09.jp
+  langs: ['ja']
+- url: koboksdon.net
+  langs: ['ja']
+- url: fle.st
+  langs: ['ja']
+- url: tokyoto.cyou
+  langs: ['ja']
+- url: itoji0419.jp
+  langs: ['ja']
+- url: misskey.ayutsuki.net
+  langs: ['ja']
+- url: misskey.haun.jp
+  langs: ['ja']
+- url: misskey.yukkukomei.com
+  langs: ['ja']
+- url: misskey.fullstuck.net
+  langs: ['ja']
+- url: fix.misskey.life
+  langs: ['ja']
+- url: tenpoku.com
+  langs: ['ja']
+- url: sacasa.casa
+  langs: ['ja']
+- url: misskey.pm
+  langs: ['ja']
+- url: m.t327.net
+  langs: ['ja']
+- url: misskey.ie.u-ryukyu.ac.jp
+  langs: ['ja']
+- url: misskey.delmulin.com
+  langs: ['ja']
+- url: mi.kanachu-homes.com
+  langs: ['ja']
+- url: misskey.okitsu.net
+  langs: ['ja']
+- url: misskey.daizin.net
+  langs: ['ja']
+- url: misskey.strix.pm
+  langs: ['ja']
+- url: girak.moe
+  langs: ['ja']
+- url: mk.precure.fun
+  langs: ['ja']
+- url: misskey.jpnatu.net
+  langs: ['ja']
+- url: key.tpc3.org
+  langs: ['ja']
+- url: ap.yamakusa.net
+  langs: ['ja']
+- url: mk.hw2k.com
+  langs: ['ja']
+- url: misskey.salmonella.club
+  langs: ['ja']
+- url: mk.crissdepauvre.shop
+  langs: ['ja']
+- url: miss.jo3qma.com
+  langs: ['ja']
+- url: mi.booyah.dev
+  langs: ['ja']
+- url: nyanta.me
+  langs: ['ja']
+- url: misskey.art
+  langs: ['ja']
 #
 ##
 #########################################
@@ -1014,6 +1124,10 @@
   langs: ['en']
 - url: invicious.net
   langs: ['en']
+- url: misskey.codingneko.com
+  langs: ['en']
+- url: freaksonly.space
+  langs: ['en']
 #
 ##
 #########################################
@@ -1177,7 +1291,20 @@
   langs: ['zh']
 - url: pari.cafe
   langs: ['zh']
-#
+- url: m.zimiao.moe
+  langs: ['zh']
+- url: m1.1z28.com
+  langs: ['zh', 'en']
+- url: ppplot.top
+  langs: ['zh']
+- url: forwriter.homes
+  langs: ['zh']
+- url: misskey.zhoushen929.com
+  langs: ['zh']
+- url: gpg.ink
+  langs: ['zh']
+- url: m.theresa.network
+  langs: ['zh']
 ##
 #########################################
 ##
@@ -1222,6 +1349,8 @@
   langs: ['ko', 'ja']
 - url: iqhina.org
   langs: ['ko']
+- url: sns.setsuna.kr
+  langs: ['ko']
 #
 ##
 #########################################
@@ -1246,6 +1375,8 @@
 - url: fotoclub.lono.space
   langs: ['ru']
 - url: social.debilosempire.org
+  langs: ['ru']
+- url: fedi.debilosempire.org
   langs: ['ru']
 #
 ##

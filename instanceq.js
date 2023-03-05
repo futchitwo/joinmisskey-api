@@ -8,10 +8,15 @@ const duplicated = mylist.filter((e, i, arr) => arr.findIndex(x => x.url === e.u
 	.map(e => e.url)
 
 if (duplicated.length > 0) console.log(`Duplicated:\n  ${duplicated.join(",\n  ")}\n`);
-else console.log("Duplicated:\n  There is no duplicated instance!\n");
+else console.log("Duplicated:\n  There is no duplicated server!\n");
+
+const invalid = mylist.filter(e => e.langs !== undefined && !Array.isArray(e.langs))
+	.map(e => e.url)
+
+if (invalid.length > 0) console.log(`Invalid:\n  ${invalid.join(",\n  ")}\n`);
 
 export default async () => {
-	console.log(`Get Instances from misskey.io`);
+	console.log(`Get servers from misskey.io`);
 
 	const notIncluded = new Set();
 	const apinum = 60
