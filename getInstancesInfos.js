@@ -14,6 +14,8 @@ const pqueue = new Queue(32)
 const ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0";
 //"JoinMisskey/0.1.0; +https://join.misskey.page/instances";
 
+const SHOW_ALL_LOG = process.env('SHOW_ALL_LOG');
+
 function safeFetch(method, url, options)/*: Promise<Response | null | false | undefined>*/ {
 	const controller = new AbortController()
 	const timeout = setTimeout(
@@ -21,17 +23,17 @@ function safeFetch(method, url, options)/*: Promise<Response | null | false | un
 		30000
 	)
 	const start = performance.now();
-	// glog("POST start", url)
+	// if(SHOW_ALL_LOG) glog("POST start", url)
 	return fetch(url, extend(true, options, { method, signal: controller.signal })).then(
 		res => {
 			if (res && res.ok) {
 				const end = performance.now();
-				if (end - start > 1000) {
+				if (end - start > 1000 && SHOW_ALL_LOG) {
 					glog.warn("POST slow", url, (end - start) / 1000)
 				}
 				return res;
 			}
-			// glog("POST finish", url, res.status, res.ok)
+			glog("POST NG...", url, res.status, res.ok)
 			if (res.status >= 500 && res.status < 600) return null;
 		},
 		async e => {
@@ -95,10 +97,10 @@ async function getNodeinfo(base)/*: Promise<Response | null | false | undefined>
 		signal: controller.signal
 	}).then(res => {
 		if (res && res.ok) {
-			glog("Get WellKnown Nodeinfo finish", wellnownUrl, res.status, res.ok)
+			if (SHOW_ALL_LOG) glog("Get WellKnown Nodeinfo finish", wellnownUrl, res.status, res.ok)
 			return res.json();
 		}
-		glog("res NG", wellnownUrl, res.status, res.ok);
+		glog("Get Wellknown NG...", wellnownUrl, res.status, res.ok);
 		return;
 	}).catch(async e => {
 		glog("Get WellKnown Nodeinfo failed...", wellnownUrl, e.errno, e.type)
@@ -139,9 +141,10 @@ async function getNodeinfo(base)/*: Promise<Response | null | false | undefined>
 		signal: controller2.signal
 	}).then(res => {
 		if (res && res.ok) {
-			glog("Get Nodeinfo finish", link.href, res.status, res.ok)
+			if(SHOW_ALL_LOG) glog("Get Nodeinfo finish", link.href, res.status, res.ok)
 			return res.json();
 		}
+		glog("Get Nodeinfo NG...")
 		return;
 	}).catch(async e => {
 		glog("Get Nodeinfo failed...", link.href, e.errno, e.type)
@@ -420,7 +423,7 @@ export const getInstancesInfos = async function () {
 	}
 
 	const interval = setInterval(() => {
-		glog(`${pqueue.getQueueLength()} requests remain and ${pqueue.getPendingLength()} requests processing.`)
+		if (SHOW_ALL_LOG) glog(`${pqueue.getQueueLength()} requests remain and ${pqueue.getPendingLength()} requests processing.`)
 	}, 1000)
 
 	await Promise.all(promises);
