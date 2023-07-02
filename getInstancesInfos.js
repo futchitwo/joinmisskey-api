@@ -30,7 +30,7 @@ function safeFetch(method, url, options)/*: Promise<Response | null | false | un
 				}
 				return res;
 			}
-			glog("POST finish", url, res.status, res.ok)
+			// glog("POST finish", url, res.status, res.ok)
 			if (res.status >= 500 && res.status < 600) return null;
 		},
 		async e => {
@@ -97,6 +97,7 @@ async function getNodeinfo(base)/*: Promise<Response | null | false | undefined>
 			glog("Get WellKnown Nodeinfo finish", wellnownUrl, res.status, res.ok)
 			return res.json();
 		}
+		glog("res NG", wellnownUrl, res.status, res.ok);
 		return;
 	}).catch(async e => {
 		glog("Get WellKnown Nodeinfo failed...", wellnownUrl, e.errno, e.type)
@@ -159,8 +160,16 @@ async function safeGetNodeInfo(base) {
 		}, timeout)
 	});
 	return getNodeinfo(base)
-		.then(res => res === undefined ? retry(10000) : res)
-		.catch(e => retry(10000))
+		.then(res => {
+			if (res === undefined) {
+				glog("Retrying GetNodeInfo due to res is undefined", base)
+				return retry(10000)
+			} else return res;
+		})
+		.catch(e => {
+			glog("Retrying GetNodeInfo due to error", base)
+			return retry(10000)
+		})
 		.catch(() => null);
 }
 
